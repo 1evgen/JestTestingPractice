@@ -1,25 +1,25 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Counter} from "./Thusday/Testing Reducer/Counter";
 
 function App() {
+
+  let list = [
+    {id: '1', title: 'Angular', isDone: true},
+    {id: '2', title: 'React', isDone: true},
+    {id: '3', title: 'JavaScript', isDone: true},
+    {id: '4', title: 'Redux', isDone: true},
+    {id: '5', title: 'Css', isDone: true}
+  ]
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+
+        <Counter/>
+
+      </div>
   );
 }
 
