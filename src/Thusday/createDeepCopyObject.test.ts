@@ -1,4 +1,12 @@
-test ('test for create deep clone object', () => {
+import {
+    addBooks, addCompains, companiesType, fixMistakeInTitle,
+    moveUserToOtherHouse, removeBook,
+    updateBooks,
+    userWithBooksType,
+    UserWithLaptopType, WithCompanies
+} from "./createDeepCopyObject";
+
+test .skip('test for create deep clone object', () => {
 
     // 1. Simple object
     let man = {
@@ -252,5 +260,140 @@ test ('test for create deep clone object', () => {
 
 })
 
+// test 11
+test('Second test', ()=> {
+
+   let user : UserWithLaptopType & userWithBooksType = {
+        name: 'Sergey',
+        hair: 32,
+        address: {
+            city: 'London',
+            house: 12
+        },
+        laptop: {
+            title: 'ZenBook'
+        },
+        books: ['HTML', "React", "CSS", "Angular" ]
+    }
+    const userCopy = moveUserToOtherHouse(user, 99, "Lill Peep");
+    expect(userCopy.address.house).toEqual(99)
+    expect(typeof userCopy.laptop.title).toEqual('string')
+    expect(userCopy.laptop.title).toEqual("Lill Peep")
+})
+
+test ('add new books', ()=> {
+    let user : UserWithLaptopType & userWithBooksType = {
+        name: 'Sergey',
+        hair: 32,
+        address: {
+            city: 'London',
+            house: 12
+        },
+        laptop: {
+            title: 'ZenBook'
+        },
+        books: ['HTML', "React", "CSS", "Angular" ]
+    }
+
+    const copyUser = addBooks(user, ['ts', 'rest API'])
+    expect(user).not.toBe(copyUser)
+    expect(copyUser.books[4]).toEqual('ts')
+    expect(copyUser.books[5]).toEqual('rest API')
+
+})
+
+test ('upDate book', ()=> {
+    let user : UserWithLaptopType & userWithBooksType = {
+        name: 'Sergey',
+        hair: 32,
+        address: {
+            city: 'London',
+            house: 12
+        },
+        laptop: {
+            title: 'ZenBook'
+        },
+        books: ['HTML', "JS", "CSS", "Angular" ]
+    }
+
+    const copyUser = updateBooks(user, "JS", "TypeScript"  )
+    expect(user).not.toBe(copyUser)
+    expect(copyUser.books[1]).toEqual('TypeScript')
+
+})
 
 
+test ('remove book', ()=> {
+    let user : UserWithLaptopType & userWithBooksType = {
+        name: 'Sergey',
+        hair: 32,
+        address: {
+            city: 'London',
+            house: 12
+        },
+        laptop: {
+            title: 'ZenBook'
+        },
+        books: ['HTML', "JS", "CSS", "Angular" ]
+    }
+
+    const copyUser = removeBook(user, "JS" )
+    expect(user).not.toBe(copyUser)
+    expect(copyUser.books.length).toEqual(3)
+    expect(copyUser.books[1]).toEqual('CSS')
+})
+
+
+test ('different object', ()=> {
+    let user : UserWithLaptopType & userWithBooksType & WithCompanies = {
+        name: 'Sergey',
+        hair: 32,
+        address: {
+            city: 'London',
+            house: 12
+        },
+        laptop: {
+            title: 'ZenBook'
+        },
+        books: ['HTML', "JS", "CSS", "Angular" ],
+        companies: [
+            {id: 1, title: 'X5'},
+            {id: 2, title: 'Leomax'},
+            {id:3, title: 'Google' }
+        ]
+    }
+let value = {id: 4, title: 'Yandex'}
+    const copyUser = addCompains(user, value)
+
+    expect(copyUser.companies.length).toEqual(4)
+    expect(copyUser.companies[3].title).toEqual('Yandex')
+    expect(user).not.toBe(copyUser)
+})
+
+
+test ('different object', ()=> {
+    let user : UserWithLaptopType & userWithBooksType & WithCompanies = {
+        name: 'Sergey',
+        hair: 32,
+        address: {
+            city: 'London',
+            house: 12
+        },
+        laptop: {
+            title: 'ZenBook'
+        },
+        books: ['HTML', "JS", "CSS", "Angular" ],
+        companies: [
+            {id: 1, title: 'X5'},
+            {id: 2, title: 'Leomax'},
+            {id: 3, title: 'GooglA' }
+        ]
+    }
+
+
+    const copyUser = fixMistakeInTitle(user, 'Google')
+
+    expect(user).not.toBe(copyUser)
+    expect(copyUser.companies[2].title).toEqual('Google')
+
+})

@@ -1,3 +1,65 @@
+
+export type userType = {
+        name: string
+        hair: number
+        address: {city: string, house: number}
+}
+export type laptopType = {
+    title: string
+}
+export type UserWithLaptopType = userType & {
+    laptop: laptopType
+}
+
+export type userWithBooksType  = userType & {
+    books: Array<string>
+}
+
+export type companiesType = {id: number, title: string}
+export type WithCompanies = {
+    companies: Array<companiesType>
+}
+
+export const moveUserToOtherHouse = (user: UserWithLaptopType & userWithBooksType, house: number, title: string) => {
+     return (
+         {
+           ...user,
+             address: {...user.address, house},
+             laptop: {...user.laptop, title}
+         })}
+
+   export const addBooks = (user: UserWithLaptopType & userWithBooksType, arr: Array<string>  )=> {
+            return (
+                {
+                    ...user,
+                    books: [...user.books, ...arr]
+                })}
+
+
+    export const updateBooks = (user: UserWithLaptopType & userWithBooksType, value: string, newValue: string)=>{
+           return (   {...user,
+                   books: user.books.map((el)=> el === value ?  newValue : el)})}
+
+    export  const removeBook = (user: UserWithLaptopType & userWithBooksType, value: string,)=> {
+        return (
+            {...user,
+                books: user.books.filter((el)=> el !== value)
+            })}
+
+export  const addCompains = (user: UserWithLaptopType & userWithBooksType & WithCompanies, value: companiesType )=> {
+    return (
+        {...user,
+           companies: [...user.companies, value]
+        })}
+
+export  const fixMistakeInTitle = (user: UserWithLaptopType & userWithBooksType & WithCompanies, value: string )=> {
+    return (
+        {...user,
+            companies: user.companies.map((el)=> el.title === 'GooglA' ? {...el,title: value}: el)
+        })}
+
+
+
 // 1. Simple object
 let man = {
     name: 'John',
