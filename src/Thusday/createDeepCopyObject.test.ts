@@ -1,4 +1,4 @@
-test('test for create deep clone object', () => {
+test ('test for create deep clone object', () => {
 
     // 1. Simple object
     let man = {
