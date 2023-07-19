@@ -2,11 +2,8 @@ import {drinkAll, noBoringZeros, squareNumber, trainingCallbackFunction} from ".
 import {json} from "stream/consumers";
 
 test('number should be without zero the end', ()=> {
-
     let num = 1000
-
     let result = noBoringZeros(num)
-
     expect(result).toBe(1)
     expect(noBoringZeros(90)).toBe(9)
     expect(noBoringZeros(-100)).toBe(-1)
@@ -67,7 +64,6 @@ describe('trainingCallbackFunction', ()=> {
             let array_1 = [1,2,3,4,5]
             trainingCallbackFunction(array_1, callback)
             expect(callback).toHaveBeenCalled()
-
 
     })
 })

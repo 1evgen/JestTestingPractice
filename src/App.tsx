@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import {Counter} from "./Thusday/Testing Reducer/Counter";
+import {ExampleComponent} from "./learnTestingRenderComponent/ExampleComponent";
+
 
 function App() {
 
@@ -15,7 +17,9 @@ function App() {
 
   return (
       <div className="App">
-        <Counter list={list}/>
+        {/*<Counter list={list}/>*/}
+         <ExampleComponent  name={'Egor'}/>
+          <ExampleComponent  name={''}/>
       </div>
   );
 }
